@@ -4,13 +4,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Login, Profile, Signup} from './src/screens';
 
+type AuthActionTypes = {type: 'LOG_IN'} | {type: 'LOG_OUT'};
+interface AuthState {
+  isLoggedIn: boolean;
+}
+interface AuthActions {
+  logIn: () => void;
+  logOut: () => void;
+}
+
 const Stack = createStackNavigator();
-export const AuthContext = React.createContext({isLoggedIn: false});
+//@ts-ignore
+export const AuthContext = React.createContext<AuthActions>({});
 
 const App = () => {
   // Simple reducer to switch between Auth and App stacks.
   const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
+    (prevState: AuthState, action: AuthActionTypes) => {
       switch (action.type) {
         case 'LOG_IN':
           return {
@@ -52,14 +62,7 @@ const App = () => {
             headerTintColor: '#575fcf',
           }}>
           {state.isLoggedIn ? (
-            <Stack.Screen
-              name="Profile"
-              component={Profile}
-              options={{
-                headerLeft: () => null,
-                gestureEnabled: false,
-              }}
-            />
+            <Stack.Screen name="Profile" component={Profile} />
           ) : (
             <>
               <Stack.Screen name="Login" component={Login} />
