@@ -7,12 +7,14 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {AuthContext} from '../../App';
 
 const Login: React.FC<{}> = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const {navigate} = useNavigation();
+  const {logIn} = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -35,9 +37,7 @@ const Login: React.FC<{}> = () => {
         style={styles.inputBox}
         value={password}
       />
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigate('Profile')}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => logIn()}>
         <Text style={styles.loginText}>Log In</Text>
       </TouchableOpacity>
       <TouchableOpacity

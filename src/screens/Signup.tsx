@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {AuthContext} from '../../App';
 
 const Signup: React.FC<{}> = () => {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const {logIn} = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -41,7 +44,7 @@ const Signup: React.FC<{}> = () => {
         style={styles.inputBox}
         value={password}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => logIn()}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
