@@ -1,12 +1,8 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
 import {AuthContext} from '../../App';
+import {Button, Input} from '../components';
 
 const Signup: React.FC<{}> = () => {
   const [username, setUsername] = React.useState('');
@@ -17,36 +13,25 @@ const Signup: React.FC<{}> = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
+      <Input
         onChangeText={(value) => setUsername(value)}
         placeholder="Username"
-        placeholderTextColor="#808e9b"
-        selectionColor="#575fcf"
-        style={styles.inputBox}
         value={username}
       />
-      <TextInput
+      <Input
         autoCapitalize="none"
         keyboardType="email-address"
         onChangeText={(value) => setEmail(value)}
         placeholder="Email"
-        placeholderTextColor="#808e9b"
-        selectionColor="#575fcf"
-        style={styles.inputBox}
         value={email}
       />
-      <TextInput
+      <Input
         onChangeText={(value) => setPassword(value)}
         placeholder="Password"
-        placeholderTextColor="#808e9b"
-        selectionColor="#575fcf"
         secureTextEntry
-        style={styles.inputBox}
         value={password}
       />
-      <TouchableOpacity style={styles.button} onPress={() => logIn()}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+      <Button text="Sign Up" onPress={() => logIn()} />
     </View>
   );
 };
@@ -56,14 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  inputBox: {
-    width: '80%',
-    margin: 15,
-    padding: 15,
-    fontSize: 16,
-    borderColor: '#808e9b',
-    borderBottomWidth: 1,
   },
   button: {
     width: '80%',
